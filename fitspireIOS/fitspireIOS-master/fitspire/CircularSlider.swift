@@ -18,7 +18,7 @@ enum CircularSliderHandleType {
 }
 
 class CircularSlider: UIControl {
-
+    var generator = UIImpactFeedbackGenerator(style: .heavy)
     var lastAngle : CGFloat = 0
     var circleToggle = 0
     var leftToggle = 0
@@ -231,6 +231,7 @@ class CircularSlider: UIControl {
   override init(frame: CGRect) {
     super.init(frame: frame)
     backgroundColor = .clear
+    generator.prepare()
     
   }
 
@@ -361,7 +362,7 @@ class CircularSlider: UIControl {
   
     override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
          let lastPoint = touch.location(in: self.superview)
-        if( count <= 1 && lastAngle > 345)
+        if( count <= 10 && lastAngle > 345)
         {
             returnHandle()
             self.count = 0
@@ -372,7 +373,7 @@ class CircularSlider: UIControl {
             self.count = 0
             return false
         }
-        if(count > 5 && lastAngle > 330)
+        if(count > 5 && lastAngle > 345)
         {circleToggle = 1
         
         completed()
@@ -380,10 +381,12 @@ class CircularSlider: UIControl {
         }
    
     self.lastAngle = floor(CircularTrig.angleRelativeToNorthFromPoint(centerPoint, toPoint: lastPoint))
-    moveHandle(self.lastAngle)
+        if (count > 2 && lastAngle < 340){
+    self.moveHandle(self.lastAngle)
+        }
     sendActions(for: UIControlEvents.valueChanged)
     count += 1
-    return true
+          return true
   
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -394,10 +397,11 @@ class CircularSlider: UIControl {
         }
     }
     func completed(){
-    
+        generator.impactOccurred()
+        generator.prepare()
         self.filledColor = UIColor.green
         moveHandle(359.5)
-        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             // Your code with delay
             self.returnHandle()
@@ -427,7 +431,7 @@ class CircularSlider: UIControl {
     
     func returnHandle() {
         var check = self.lastAngle
-       
+     
        
             repeat{
                

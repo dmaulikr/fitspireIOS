@@ -8,10 +8,10 @@
 
 import UIKit
 import CoreData
-
+import Foundation
 class WorkoutViewController: UIViewController {
 
-    @IBOutlet weak var workoutTableView: UITableView!
+    @IBOutlet weak var workoutCollectionView: UICollectionView!
     var workouts: [NSManagedObject] = []
     var addingIndex = 0
     var dates : [NSManagedObject] = []
@@ -47,72 +47,10 @@ class WorkoutViewController: UIViewController {
         
     }
 
-    @IBAction func AddWorkout(_ sender: UIBarButtonItem) {
-        
-        let alert = UIAlertController(title: "Create Workout",
-                                      message: "Name For Your New Workout",
-                                      preferredStyle: .alert)
-        
-        let saveAction = UIAlertAction(title: "Save", style: .default) {
-            [unowned self] action in
-            
-            guard let textField = alert.textFields?.first,
-                let nameToSave = textField.text else {
-                    return
-            }
-            
-            self.save(name: nameToSave)
-            self.workoutTableView.reloadData()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .default)
-        
-        alert.addTextField()
-        
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
-        
-    }
-    
-    
-    func save(name: String) {
-        
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        // 1 first get context
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        // 2 then get entity
-        let entity =
-            NSEntityDescription.entity(forEntityName: "Workouts",
-                                       in: managedContext)!
-        
-        let workout = NSManagedObject(entity: entity,
-                                     insertInto: managedContext)
-        
-        // 3
-        workout.setValue(name, forKeyPath: "workoutName")
-        
-        // 4
-        do {
-            try managedContext.save()
-            workouts.append(workout)
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-
-
+ 
     @IBAction func show(sender: UIButton) {
-        if let cell = sender.superview?.superview as? WorkoutTableViewCell {
-            let indexPath = workoutTableView.indexPath(for: cell)
+        if let cell = sender.superview?.superview as? WorkoutCollectionViewCell {
+            let indexPath = workoutCollectionView.indexPath(for: cell)
             
             self.addingIndex = (indexPath?.row)!
             print(self.addingIndex)
@@ -126,7 +64,7 @@ class WorkoutViewController: UIViewController {
         
         
         actionSheet.addAction(UIAlertAction(title: "Add to Schedule", style: .default, handler: {action in self.chooseDay()} ))
-        actionSheet.addAction(UIAlertAction(title: "Share Workout", style: .default, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Delete Workout", style: .default, handler: nil))
         
         
         
@@ -145,6 +83,25 @@ class WorkoutViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
         
     }
+    func delete(sender: Any){
+        
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+       
+            let workout = workouts[self.addingIndex]
+            context.delete(workout)
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Workouts")
+            do {
+                workouts = try context.fetch(fetchRequest)
+            } catch {
+                print("Fetching Failed")
+            
+        }
+        workoutCollectionView.reloadData()
+    }
+
+
     func addToDay(workoutDate: Date){
         var addDate : [NSManagedObject] = []
              let predicate = NSPredicate(format: "workoutDate == %@", workoutDate as CVarArg)
@@ -181,28 +138,30 @@ class WorkoutViewController: UIViewController {
 
   
 }
-//TableView Extensions
+//CollectionView Extensions
 
-extension WorkoutViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
+extension WorkoutViewController: UICollectionViewDataSource {
+    func collectionView(_ CollectionView: UICollectionView,
+                   numberOfItemsInSection section: Int) -> Int {
         return workouts.count
     }
     
-  func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath)
-        -> UITableViewCell {
+  func collectionView(_ CollectionView: UICollectionView,
+                   cellForItemAt indexPath: IndexPath)
+        -> UICollectionViewCell {
             
             let workout = workouts[indexPath.row]
             let cell =
-                tableView.dequeueReusableCell(withIdentifier: "Cell",
-                                              for: indexPath) as! WorkoutTableViewCell
-            cell.workoutLabel.text = workout.value(forKeyPath: "workoutName") as? String
-            cell.workoutPic.image = UIImage(named: "tricepdips.png")
+                CollectionView.dequeueReusableCell(withReuseIdentifier: "Cell",
+                                              for: indexPath) as! WorkoutCollectionViewCell
+            
+           var workoutName = workout.value(forKeyPath: "workoutName") as! String
+             cell.workoutLabel.text = workoutName.uppercased()
+            cell.workoutPic.image = UIImage(named: "strength.png")
             return cell
     }
-    // method to run when table view cell is tapped
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // method to run when Collection view cell is tapped
+    func CollectionView(_ CollectionView: UICollectionView, didSelectRowAt indexPath: IndexPath) {
         
         // Segue to the second view controller
         self.performSegue(withIdentifier: "yourSegue", sender: self)
@@ -214,35 +173,12 @@ extension WorkoutViewController: UITableViewDataSource {
             
           
             let detailsVC = segue.destination as! DisplayWorkoutViewController
-            let cell = sender as! WorkoutTableViewCell
-            let thisWorkout = cell.workoutLabel.text as String!
-            detailsVC.workoutName = thisWorkout!
+            let cell = sender as! WorkoutCollectionViewCell
+          let indexPath =  self.workoutCollectionView.indexPath(for: cell)
+            
+            let thisWorkout = workouts[(indexPath?.row)!].value(forKey: "workoutName") as! String
+            detailsVC.workoutName = thisWorkout
 
     }
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        if editingStyle == .delete {
-            let workout = workouts[indexPath.row]
-            context.delete(workout)
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Workouts")
-            do {
-                workouts = try context.fetch(fetchRequest)
-            } catch {
-                print("Fetching Failed")
-            }
-        }
-        tableView.reloadData()
-    }
-}
-extension Date
-{
-    func toString( dateFormat format  : String ) -> String
-    {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
-    }
-    
 }

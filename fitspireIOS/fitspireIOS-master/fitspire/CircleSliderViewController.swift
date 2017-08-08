@@ -13,8 +13,10 @@ import CloudKit
 class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKPickerViewDelegate{
     @IBOutlet var pickerView : AKPickerView!
     @IBOutlet var pickerView1: AKPickerView!
-    let weights = ["5", "10", "15","20","25","30","35","40","45", "50"]
-    let reps = ["1", "2", "3","4","5","6","7","8","9","10"]
+    @IBOutlet var noteButton: UIButton!
+    var lastSliderVal : Float = 0.0
+    var weights : [String] = []
+    var reps : [String] = []
     var sets : [String] = []
     var exercises  : [NSManagedObject] = []
     var exerciseNames : [String] = []
@@ -33,11 +35,27 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
     @IBOutlet var progressBar : YLProgressBar!
     var setTotal : Double = 0
     var currentSet :Double = 0
-    
+    var setCounter = 0
+    var noteView : NoteView!
+    var noteText : String = ""
+    var upView : UIView?
+    var downView: UIView?
+   @IBOutlet var dotCircle : UIImageView!
+    let generator = UIImpactFeedbackGenerator(style: .heavy)
+    var sliderDiff : CGFloat = 0.0
     
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    for index in 1...60 {
+        let rep = String(index)
+        reps.append(rep)
+    }
+    for index in 1...50 {
+        let weight = String(index * 5)
+        weights.append(weight)
+        
+    }
     let formatter = DateFormatter()
     formatter.dateFormat = "dd.MM.yyyy"
     let result = formatter.string(from: self.todaysDate)
@@ -68,8 +86,9 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
     }
     getSetTotal()
     fixUpDisplay()
-   
+    generator.prepare()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         
         self.instanceID = UUID().uuidString
@@ -102,9 +121,27 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
     }
         return " no"
         }
-  
-    
+   
+    @IBAction func noteButtonPressed(sender: UIButton){
+        print("buttonPressed")
+        let noteFrame = CGRect(x: (super.view.frame.width - 330)/2, y: super.view.frame.width - 200, width: 330, height: 200)
+       self.noteView = Bundle.main.loadNibNamed("NoteView", owner: self, options: nil)?.first as? NoteView
+        noteView.frame = noteFrame
+        self.noteView.closeButton.addTarget(self, action: #selector(self.closeNoteView) , for: .touchUpInside)
+         self.noteView.saveButton.addTarget(self, action: #selector(self.saveNoteView) , for: .touchUpInside)
+        self.view.addSubview(noteView)
+        
+        
+                }
+    func saveNoteView(){
+        self.noteText = self.noteView.noteText.text
+     noteView.removeFromSuperview()
+    }
+    func closeNoteView (){
+       noteView.removeFromSuperview()
+    }
     func completeSet(_slider: CircularSlider){
+       
         let weightIndex = pickerView.selectedItem
         let logWeight = Int(weights[weightIndex])!
         print(logWeight)
@@ -119,13 +156,39 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
         record["weight"] = logWeight as CKRecordValue
         record["date"] = self.todaysDate as CKRecordValue
         record["instanceID"] = self.instanceID as CKRecordValue
+        if(noteText != ""){
+            record["notes"] = self.noteText as CKRecordValue
+        }
+        var indexSpot = Int(self.currentSet) + 1
+        var setSpot = self.setCounter + 1
+        
+        record["index"] = indexSpot as CKRecordValue
+       record["setCount"] = setSpot as CKRecordValue
+        print("index was set to \(indexSpot)")
+        print("setCount was set to \(setSpot)")
         
         
         self.logData.append(record)
          updateSet()
     }
     
-          
+    @IBAction func rotateImage() {
+        var transform = self.dotCircle.transform.rotated(by: CGFloat(CGFloat(M_PI/2)/10));
+        if(self.lastSliderVal != 0){
+        self.sliderDiff = CGFloat(self.circularSlider.currentValue - self.lastSliderVal)
+       print (sliderDiff)
+        }
+       
+        if sliderDiff > 1.5{
+         transform = self.dotCircle.transform.rotated(by: CGFloat(CGFloat(sliderDiff)/10));
+
+        }
+    
+        self.dotCircle.transform = transform;
+        self.lastSliderVal = self.circularSlider.currentValue
+
+        
+    }
     func updateSet()
     {
         self.currentSet += 1
@@ -143,7 +206,7 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
         let tempString = String(describing: tempSet!)
         if( tempSet != 0){
             
-            
+            self.setCounter += 1
             self.sets[self.setLabelCount] = tempString
             self.setLabel.layer.add(self.animation, forKey: nil)
             self.setLabel.text = tempString
@@ -157,10 +220,12 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
             self.workoutLabel.layer.add(self.animation, forKey: nil)
             self.workoutLabel.text = exerciseNames[workoutLabelCount + 1]
             self.workoutLabelCount += 1
+            self.setCounter = 0
             
         }
         }
-          }
+    }
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "finish" {
@@ -168,7 +233,75 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
             destVC.logData = self.logData
             destVC.instanceID = self.instanceID
             destVC.todaysDate = self.todaysDate
+            destVC.workoutName = self.sentName
     }
+          }
+    func tapHandler(gesture: UITapGestureRecognizer) {
+        let lastPoint = gesture.location(in: self.view)
+        let picFrame = CGRect(x: 0, y: 0, width: 100, height: 50)
+
+        // handle touch down and touch up events separately
+        if gesture.state == .began {
+            
+            generator.impactOccurred()
+                generator.prepare()
+                      let upFrame =  CGRect(x: pickerView.frame.midX + 65   , y: pickerView.frame.midY + 190, width: 100, height: 50)
+            
+            self.upView = UIView(frame: upFrame)
+           
+         
+            let backgroundImage = UIImageView(frame: picFrame)
+               backgroundImage.alpha = 0.7
+            backgroundImage.image = UIImage(named: "whiteup.png")
+            self.upView!.addSubview(backgroundImage)
+            let downFrame =  CGRect(x: pickerView.frame.midX + 65   , y: pickerView.frame.midY + 310 , width: 100, height: 50)
+            
+            self.downView = UIView(frame: downFrame)
+            self.upView?.backgroundColor = UIColor.clear
+
+            let backgroundImage1 = UIImageView(frame: picFrame)
+            backgroundImage1.alpha = 0.3
+            backgroundImage1.image = UIImage(named: "whitedown.png")
+            self.downView!.addSubview(backgroundImage1)
+            self.view.addSubview(upView!)
+            self.view.addSubview(downView!)
+        }
+        else if gesture.state == .changed {
+            if (upView!.frame.contains(lastPoint)){
+                let backgroundImage = UIImageView(frame: picFrame)
+                      backgroundImage.alpha = 0.7
+                backgroundImage.image = UIImage(named: "greenup.png")
+                self.upView!.addSubview(backgroundImage)
+
+            }
+            if (downView!.frame.contains(lastPoint)){
+                let backgroundImage = UIImageView(frame: picFrame)
+                      backgroundImage.alpha = 0.7
+                backgroundImage.image = UIImage(named: "greendown.png")
+                self.downView!.addSubview(backgroundImage)
+
+            }
+            if !(upView!.frame.contains(lastPoint)){
+                let backgroundImage = UIImageView(frame: picFrame)
+                      backgroundImage.alpha = 0.7
+                backgroundImage.image = UIImage(named: "whiteup.png")
+                self.upView!.addSubview(backgroundImage)
+
+            }
+            if !(downView!.frame.contains(lastPoint)){
+                let backgroundImage = UIImageView(frame: picFrame)
+                      backgroundImage.alpha = 0.7
+                backgroundImage.image = UIImage(named: "whitedown.png")
+                self.downView!.addSubview(backgroundImage)
+
+            }
+
+        }
+        else if  gesture.state == .ended {
+            upView!.removeFromSuperview()
+            downView!.removeFromSuperview()
+            
+        }
     }
     func fixUpDisplay(){
         pickerView.tag = 1
@@ -211,6 +344,7 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
         // setup target to watch for value change
         
         circularSlider.addTarget(self, action: #selector(CircleSliderViewController.completeSet(_slider:)), for: UIControlEvents.primaryActionTriggered)
+        circularSlider.addTarget(self, action: #selector(CircleSliderViewController.rotateImage), for: UIControlEvents.valueChanged)
         circularSlider.circularSliderHandle.contents = UIImage(named: "print.png")?.cgImage
         // setup slider defaults
         circularSlider.handleType = .custom
@@ -222,29 +356,28 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
         sliderView.addSubview(circularSlider)
         //   sliderView.addGestureRecognizer(recognizer)
         
-//     progressBar.type = YLProgressBarType.flat
-//       progressBar.progressTintColor = UIColor.blue
-//        progressBar.hideStripes = true
-//        // Green rounded/gloss progress, with vertical animated stripes in the left direction
        progressBar.type = YLProgressBarType.rounded
 //        progressBar.progressTintColor = UIColor.green
-       progressBar.stripesOrientation = YLProgressBarStripesOrientation.vertical
+       progressBar.stripesOrientation = YLProgressBarStripesOrientation.right
         progressBar.stripesDirection = YLProgressBarStripesDirection.left
         
-      let rainbowColors: [UIColor] = [UIColor(red: 33 / 255.0, green: 180 / 255.0, blue: 162 / 255.0, alpha: 1.0), UIColor(red: 3 / 255.0, green: 137 / 255.0, blue: 166 / 255.0, alpha: 1.0), UIColor(red: 91 / 255.0, green: 63 / 255.0, blue: 150 / 255.0, alpha: 1.0), UIColor(red: 87 / 255.0, green: 26 / 255.0, blue: 70 / 255.0, alpha: 1.0), UIColor(red: 126 / 255.0, green: 26 / 255.0, blue: 36 / 255.0, alpha: 1.0), UIColor(red: 149 / 255.0, green: 37 / 255.0, blue: 36 / 255.0, alpha: 1.0), UIColor(red: 228 / 255.0, green: 69 / 255.0, blue: 39 / 255.0, alpha: 1.0), UIColor(red: 245 / 255.0, green: 166 / 255.0, blue: 35 / 255.0, alpha: 1.0), UIColor(red: 165 / 255.0, green: 202 / 255.0, blue: 60 / 255.0, alpha: 1.0), UIColor(red: 202 / 255.0, green: 217 / 255.0, blue: 54 / 255.0, alpha: 1.0), UIColor(red: 111 / 255.0, green: 188 / 255.0, blue: 84 / 255.0, alpha: 1.0)]
+
         
       // self.progressBar.hideStripes = true
-     
+        let gradientColors = [UIColor.white, UIColor(red: 215/255, green: 255/255, blue: 255/255, alpha: 1.0),UIColor(red: 157/255, green: 255/255, blue: 255/255, alpha: 1.0), UIColor(red: 84/255, green: 255/255, blue: 255/255, alpha: 1.0), UIColor(red: 84/255, green: 255/255, blue: 220/255, alpha: 1.0), UIColor(red: 84/255, green: 255/255, blue: 197/255, alpha: 1.0), UIColor(red: 84/255, green: 255/255, blue: 154/255, alpha: 1.0), UIColor(red: 84/255, green: 255/255, blue: 117/255, alpha: 1.0), UIColor(red: 84/255, green: 255/255, blue: 85/255, alpha: 1.0), UIColor(red: 84/255, green: 255/255, blue: 30/255, alpha: 1.0), UIColor(red: 84/255, green: 255/255, blue: 0/255, alpha: 1.0)]
         progressBar.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayMode.progress
-        progressBar.progressTintColors = rainbowColors
+        progressBar.progressTintColors = gradientColors
+        
         // To allow the gradient colors to fit the progress width
         progressBar.progressStretch = true
         progressBar.progress = 0
         progressBar.indicatorTextLabel.font = UIFont(name: "Avenir", size: 12.0)
+        progressBar.indicatorTextLabel.textColor = UIColor.black
         progressBar.backgroundColor = UIColor.clear
        
-
+        let tap = UILongPressGestureRecognizer(target: self, action: #selector(self.tapHandler))
+        tap.minimumPressDuration = 0.5
+        pickerView.addGestureRecognizer(tap)
 
     }
 }
-

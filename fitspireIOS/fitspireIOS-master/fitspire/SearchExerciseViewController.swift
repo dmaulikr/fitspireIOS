@@ -1,7 +1,7 @@
 //
-//  AllExerciseViewController.swift
+//  SearchExerciseViewController.swift
 //  fitspire
-//install.packages("PASWR")
+//
 //  Created by LUNVCA on 7/20/17.
 //  Copyright © 2017 uca. All rights reserved.
 //

@@ -20,6 +20,16 @@ class GoInitialViewController: UIViewController, AKPickerViewDelegate,AKPickerVi
         super.viewDidLoad()
         workoutPick.delegate = self
         workoutPick.dataSource = self
+        
+        workoutPick.interitemSpacing = 20.0
+        workoutPick.font = UIFont(name: "Avenir-Light", size: 22.0)!
+        workoutPick.highlightedFont  = UIFont(name: "Avenir-Light", size: 22.0)!
+        workoutPick.textColor = UIColor.lightGray
+        workoutPick.highlightedTextColor = UIColor.white
+        self.workoutPick.reloadData()
+        // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -32,22 +42,15 @@ class GoInitialViewController: UIViewController, AKPickerViewDelegate,AKPickerVi
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        if workouts.count != 0{
         for index in 0 ... workouts.count - 1 {
             let thisWorkout = workouts[index]
             let thisWorkoutName = thisWorkout.value(forKey: "workoutName")
             workoutNames.append(thisWorkoutName as! String)
         }
-
+        }
         
-        workoutPick.interitemSpacing = 20.0
-        workoutPick.font = UIFont(name: "Avenir-Light", size: 22.0)!
-        workoutPick.highlightedFont  = UIFont(name: "Avenir-Light", size: 22.0)!
-        workoutPick.textColor = UIColor.lightGray
-        workoutPick.highlightedTextColor = UIColor.white
-        self.workoutPick.reloadData()
-        // Do any additional setup after loading the view.
-    }
-    override func viewWillAppear(_ animated: Bool) {
+
         var dateCheck : [NSManagedObject] = []
         let date = Date()
         let formatter = DateFormatter()
@@ -55,13 +58,7 @@ class GoInitialViewController: UIViewController, AKPickerViewDelegate,AKPickerVi
         let result = formatter.string(from: date)
         let searchDate = formatter.date(from: result)!
         print(searchDate)
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
+    
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Meta")
         fetchRequest.predicate = NSPredicate(format: "workoutDate == %@", searchDate as CVarArg)
         
@@ -78,6 +75,13 @@ class GoInitialViewController: UIViewController, AKPickerViewDelegate,AKPickerVi
             self.workoutPick.isHidden = true
             self.message.text = "The workout you have selected for today is '\(workoutCheck!).' Are you ready to begin? "
             self.message.font = UIFont(name: "Avenir", size: 23)
+            self.goButton.isHidden = false
+        }
+        if ( workoutNames.count == 0){
+            self.message.text = "It looks like you don't have any workouts yet, create one and come back to enable GO"
+            
+            self.workoutPick.isHidden = true
+            self.goButton.isHidden = true
         }
         
     }

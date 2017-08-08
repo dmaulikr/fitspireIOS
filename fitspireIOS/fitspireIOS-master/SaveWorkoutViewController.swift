@@ -15,13 +15,22 @@ class SaveWorkoutViewController: UIViewController {
     var logData : [CKRecord]!
     var todaysDate : Date!
     var logRecord : CKRecord?
-    
+    var workoutName : String!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let logRecordID = CKRecordID(recordName: instanceID)
+        var logRecordID = CKRecordID(recordName: instanceID)
         self.logRecord = CKRecord(recordType: "loggedWorkout", recordID: logRecordID)
+        var today = Date()
+        let thisDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = " YYYY EEEE, MMM dd"
+        let todayString = dateFormatter.string(from: thisDate)
+        let dateValue = dateFormatter.date(from: todayString) as Date!
+
+        self.logRecord?.setValue(dateValue, forKey: "date")
+        self.logRecord?.setValue(workoutName, forKey: "workoutName")
         
         // Do any additional setup after loading the view.
     }
@@ -29,9 +38,10 @@ class SaveWorkoutViewController: UIViewController {
         
         let operation = CKModifyRecordsOperation(recordsToSave: self.logData, recordIDsToDelete: nil)
         CKContainer.default().privateCloudDatabase.add(operation)
-        CKContainer.default().privateCloudDatabase.save(logRecord!) {
+        CKContainer.default().privateCloudDatabase.save(self.logRecord!) {
             (record, error) in
             if error != nil {
+                print(error!)
                 // Insert error handling
                 return
             }
@@ -62,3 +72,4 @@ class SaveWorkoutViewController: UIViewController {
     */
 
 }
+
