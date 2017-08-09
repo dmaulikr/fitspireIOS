@@ -12,12 +12,18 @@ class ExercisesViewController: UIViewController, UICollectionViewDelegate, UICol
 let reuseIdentifier = "cell"
 var bodyParts = ["Chest", "Biceps", "Quads","Abs","Calves", "Triceps", "Upper Back","Lower Back","Shoulders", "Hamstrings/Glutes", "Traps", "Forearms"]
     var names = ["chest.png","biceps.png","quads.png","abs.png", "calves.png","triceps.png","back.png","lowerback.png","deltoid.png","glutes.png","traps.png","forearm.png"]
+    @IBOutlet var background : UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+              // Do any additional setup after loading the view.
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        if let savedValue = UserDefaults.standard.string(forKey: "backgroundName") {
+            var image = UIImage(named: savedValue)
+            background.image = image
+        }
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

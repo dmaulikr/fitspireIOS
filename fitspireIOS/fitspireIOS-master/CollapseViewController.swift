@@ -16,7 +16,7 @@ class CollapseViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var tableView : UITableView!
     @IBOutlet var exerciseImage: UIImageView!
     @IBOutlet var exerciseLabel : UILabel!
-   
+    @IBOutlet var background : UIImageView!
     struct Section {
         var name: String = ""
         var items: [String] = []
@@ -33,6 +33,7 @@ class CollapseViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+     
         
         //first get all of the values for the display
         let photo =
@@ -87,7 +88,13 @@ class CollapseViewController: UIViewController, UITableViewDelegate, UITableView
      
           }
 
-    //
+    override func viewWillAppear(_ animated: Bool) {
+        if let savedValue = UserDefaults.standard.string(forKey: "backgroundName") {
+            var image = UIImage(named: savedValue)
+            background.image = image
+        }
+        
+    }
     // MARK: - Table view delegate
     //
     

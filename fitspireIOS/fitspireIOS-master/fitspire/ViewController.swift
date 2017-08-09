@@ -14,7 +14,7 @@ class ViewController: UITableViewController {
 
     private let kTableHeaderHeight : CGFloat = 300.0
     var headerView : UIView!
-    @IBOutlet var profileImage : UIImageView!
+   
     @IBOutlet var segmentControl : customSegment!
   var thisweek =  [Date]()
   var item = [SplitItem]()
@@ -23,14 +23,39 @@ class ViewController: UITableViewController {
     var dateBack = [Date]()
     var dates : [NSManagedObject] = []
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        let image = UIImage(named:"linked.jpg")
-        self.profileImage.maskCircle(anyImage: image!)
+        
+        //first clean up past dates
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
+        let today = NSDate()
+        let fetchRequest: NSFetchRequest<Meta> = Meta.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "workoutDate < %@", today)
+        let object : [NSManagedObject] = try! managedContext.fetch(fetchRequest)
+        for item in object{
+        managedContext.delete(item)
+        }
+        do {
+            try managedContext.save() // <- remember to put this :)
+        } catch {
+            // Do something... fatalerror
+        }
+
+        
+        let button = UIButton.init(type: .custom)
+        button.setImage(UIImage.init(named: "settings_3_filled-50.png"), for: UIControlState.normal)
+        button.addTarget(self, action:#selector(ViewController.callMethod), for: UIControlEvents.touchUpInside)
+        button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30) //CGRectMake(0, 0, 30, 30)
+        let barButton = UIBarButtonItem.init(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
+        
+        //let image = UIImage(named:"linked.jpg")
+        //self.profileImage.maskCircle(anyImage: image!)
+      
         
         let fetchRequest1 = NSFetchRequest<NSManagedObject>(entityName: "Meta")
         do {
@@ -68,7 +93,7 @@ class ViewController: UITableViewController {
             item.append(initSplit)
         }
 
-    
+       
         tableView.layoutMargins = UIEdgeInsets.zero
         tableView.separatorInset = UIEdgeInsets.zero
         headerView = tableView.tableHeaderView
@@ -78,7 +103,10 @@ class ViewController: UITableViewController {
         tableView.contentOffset = CGPoint(x: 0 , y: -kTableHeaderHeight)
         updateHeaderView()
         }
-    
+    func callMethod(){
+        performSegue(withIdentifier: "toSettings", sender: self)
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var dateMatch : [NSManagedObject] = []

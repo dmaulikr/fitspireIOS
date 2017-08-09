@@ -25,6 +25,7 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
     @IBOutlet var setLabel : UILabel!
     @IBOutlet weak var sliderView: UIView!
     @IBOutlet var workoutLabel : UILabel!
+    @IBOutlet var background : UIImageView!
     var todaysDate = Date()
     var workoutLabelCount = 0
     var setLabelCount = 0
@@ -46,7 +47,10 @@ class CircleSliderViewController: UIViewController,  AKPickerViewDataSource, AKP
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    if let savedValue = UserDefaults.standard.string(forKey: "backgroundName") {
+        var image = UIImage(named: savedValue)
+        background.image = image
+    }
     for index in 1...60 {
         let rep = String(index)
         reps.append(rep)

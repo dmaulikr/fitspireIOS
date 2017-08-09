@@ -20,9 +20,10 @@ class SearchExerciseViewController: UIViewController, UICollectionViewDelegate,U
     var exer : [CKRecord] = []
     var workouts: [NSManagedObject] = []
     @IBOutlet var searchBar : UISearchBar!
+    @IBOutlet var background : UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         setupSearchBar()
         
         
@@ -44,6 +45,12 @@ class SearchExerciseViewController: UIViewController, UICollectionViewDelegate,U
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+  
+            if let savedValue = UserDefaults.standard.string(forKey: "backgroundName") {
+                var image = UIImage(named: savedValue)
+                background.image = image
+            }
+            
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return

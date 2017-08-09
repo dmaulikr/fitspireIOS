@@ -10,7 +10,7 @@ import UIKit
 import CloudKit
 class SaveWorkoutViewController: UIViewController {
     
-    
+    @IBOutlet var background: UIImageView!
     var instanceID : String!
     var logData : [CKRecord]!
     var todaysDate : Date!
@@ -20,6 +20,10 @@ class SaveWorkoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let savedValue = UserDefaults.standard.string(forKey: "backgroundName") {
+            var image = UIImage(named: savedValue)
+            background.image = image
+        }
         var logRecordID = CKRecordID(recordName: instanceID)
         self.logRecord = CKRecord(recordType: "loggedWorkout", recordID: logRecordID)
         var today = Date()

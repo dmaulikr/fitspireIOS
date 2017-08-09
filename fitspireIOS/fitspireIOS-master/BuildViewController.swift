@@ -16,7 +16,7 @@ class BuildViewController: UIViewController , UICollectionViewDataSource, UIColl
     var imageNames : [String] = ["asback.jpg","tonyHorton.jpg","hulk mania.jpg"]
    @IBOutlet var backView : UILabel!
    @IBOutlet var backView2 : UILabel!
-    
+    @IBOutlet var background : UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         featured.backgroundColor = UIColor.clear
@@ -27,8 +27,16 @@ class BuildViewController: UIViewController , UICollectionViewDataSource, UIColl
         backView.layer.shadowOffset = CGSize(width: 20, height: 10)
         backView2.layer.shadowOffset = CGSize(width: 20, height: 10)
         // Do any additional setup after loading the view.
-    }
+      
 
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if let savedValue = UserDefaults.standard.string(forKey: "backgroundName") {
+            var image = UIImage(named: savedValue)
+            background.image = image
+        }
+
+    }
   
     // MARK: - UICollectionViewDataSource protocol
     

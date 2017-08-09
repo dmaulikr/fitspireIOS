@@ -20,13 +20,14 @@ class NewWorkoutViewController: UIViewController, UITextFieldDelegate, AKPickerV
     @IBOutlet var descTextView : UITextView!
     @IBOutlet var createButton : UIButton!
     @IBOutlet var plusLabel : UILabel!
-    
+    @IBOutlet var background: UIImageView!
     var muscles : [String] = ["---          " ,"Upper Body", "Lower Body", "Full Body", "Core", "Chest", "Biceps", "Quads","Abs","Calves", "Triceps", "Upper Back","Lower Back","Shoulders", "Hamstrings/Glutes", "Traps", "Forearms"]
     var type : [String] = ["---          ","Strength", "Cardio", "Yoga", "Stretch"]
     var xp : [String]  = ["---           ","Beginner", "Intermediate", "Expert"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         viewForm.layer.borderWidth = 2
         viewForm.layer.borderColor = UIColor.white.cgColor
         viewForm.layer.cornerRadius = 8.0
@@ -70,6 +71,13 @@ class NewWorkoutViewController: UIViewController, UITextFieldDelegate, AKPickerV
 
         
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if let savedValue = UserDefaults.standard.string(forKey: "backgroundName") {
+            var image = UIImage(named: savedValue)
+            background.image = image
+        }
+        
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.textFieldShouldReturn(nameTextField)

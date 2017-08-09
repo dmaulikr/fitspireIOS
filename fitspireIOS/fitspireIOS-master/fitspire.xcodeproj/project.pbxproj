@@ -129,6 +129,31 @@
 		17FDD5341F39543400CF6577 /* greenup.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5301F39543400CF6577 /* greenup.png */; };
 		17FDD5351F39543400CF6577 /* greendown.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5311F39543400CF6577 /* greendown.png */; };
 		17FDD5371F3A10E700CF6577 /* dotcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5361F3A10E700CF6577 /* dotcircle.png */; };
+		17FDD5391F3A3EE900CF6577 /* settings_3_filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5381F3A3EE900CF6577 /* settings_3_filled-50.png */; };
+		17FDD53B1F3A568E00CF6577 /* ThemePickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FDD53A1F3A568E00CF6577 /* ThemePickerTableViewController.swift */; };
+		17FDD54F1F3A58EA00CF6577 /* Vine.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD53D1F3A58EA00CF6577 /* Vine.png */; };
+		17FDD5501F3A58EA00CF6577 /* Tranquil.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD53E1F3A58EA00CF6577 /* Tranquil.png */; };
+		17FDD5511F3A58EA00CF6577 /* Sweet Morning.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD53F1F3A58EA00CF6577 /* Sweet Morning.png */; };
+		17FDD5521F3A58EA00CF6577 /* Red Ocean.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5401F3A58EA00CF6577 /* Red Ocean.png */; };
+		17FDD5531F3A58EA00CF6577 /* Radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5411F3A58EA00CF6577 /* Radar.png */; };
+		17FDD5541F3A58EA00CF6577 /* Purple White.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5421F3A58EA00CF6577 /* Purple White.png */; };
+		17FDD5551F3A58EA00CF6577 /* Poncho.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5431F3A58EA00CF6577 /* Poncho.png */; };
+		17FDD5561F3A58EA00CF6577 /* Netflix.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5441F3A58EA00CF6577 /* Netflix.png */; };
+		17FDD5571F3A58EA00CF6577 /* Lizard.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5451F3A58EA00CF6577 /* Lizard.png */; };
+		17FDD5581F3A58EA00CF6577 /* Grapefruit Sunset.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5461F3A58EA00CF6577 /* Grapefruit Sunset.png */; };
+		17FDD5591F3A58EA00CF6577 /* Frost.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5471F3A58EA00CF6577 /* Frost.png */; };
+		17FDD55A1F3A58EA00CF6577 /* Ed's Sunset Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5481F3A58EA00CF6577 /* Ed's Sunset Gradient.png */; };
+		17FDD55B1F3A58EA00CF6577 /* Dusk.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD5491F3A58EA00CF6577 /* Dusk.png */; };
+		17FDD55C1F3A58EA00CF6577 /* Disco.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD54A1F3A58EA00CF6577 /* Disco.png */; };
+		17FDD55D1F3A58EA00CF6577 /* Deep Space.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD54B1F3A58EA00CF6577 /* Deep Space.png */; };
+		17FDD55E1F3A58EA00CF6577 /* Decent.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD54C1F3A58EA00CF6577 /* Decent.png */; };
+		17FDD55F1F3A58EA00CF6577 /* Brady Brady Fun Fun.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD54D1F3A58EA00CF6577 /* Brady Brady Fun Fun.png */; };
+		17FDD5601F3A58EA00CF6577 /* 50 Shades of Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 17FDD54E1F3A58EA00CF6577 /* 50 Shades of Grey.png */; };
+		17FDD5621F3A60C400CF6577 /* ThemePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FDD5611F3A60C400CF6577 /* ThemePreviewViewController.swift */; };
+		17FDD5641F3A6C3700CF6577 /* BuildHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FDD5631F3A6C3700CF6577 /* BuildHomeViewController.swift */; };
+		17FDD5661F3A6F0500CF6577 /* BrowseExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FDD5651F3A6F0500CF6577 /* BrowseExerciseViewController.swift */; };
+		17FDD5681F3A78F700CF6577 /* YNActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FDD5671F3A78F700CF6577 /* YNActionSheet.swift */; };
+		17FDD56C1F3AA85600CF6577 /* YNActionSheetNoTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FDD56B1F3AA85600CF6577 /* YNActionSheetNoTitle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -259,6 +284,31 @@
 		17FDD5301F39543400CF6577 /* greenup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenup.png; sourceTree = "<group>"; };
 		17FDD5311F39543400CF6577 /* greendown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greendown.png; sourceTree = "<group>"; };
 		17FDD5361F3A10E700CF6577 /* dotcircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dotcircle.png; sourceTree = "<group>"; };
+		17FDD5381F3A3EE900CF6577 /* settings_3_filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_3_filled-50.png"; sourceTree = "<group>"; };
+		17FDD53A1F3A568E00CF6577 /* ThemePickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePickerTableViewController.swift; sourceTree = "<group>"; };
+		17FDD53D1F3A58EA00CF6577 /* Vine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vine.png; sourceTree = "<group>"; };
+		17FDD53E1F3A58EA00CF6577 /* Tranquil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tranquil.png; sourceTree = "<group>"; };
+		17FDD53F1F3A58EA00CF6577 /* Sweet Morning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sweet Morning.png"; sourceTree = "<group>"; };
+		17FDD5401F3A58EA00CF6577 /* Red Ocean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Red Ocean.png"; sourceTree = "<group>"; };
+		17FDD5411F3A58EA00CF6577 /* Radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Radar.png; sourceTree = "<group>"; };
+		17FDD5421F3A58EA00CF6577 /* Purple White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Purple White.png"; sourceTree = "<group>"; };
+		17FDD5431F3A58EA00CF6577 /* Poncho.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Poncho.png; sourceTree = "<group>"; };
+		17FDD5441F3A58EA00CF6577 /* Netflix.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Netflix.png; sourceTree = "<group>"; };
+		17FDD5451F3A58EA00CF6577 /* Lizard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lizard.png; sourceTree = "<group>"; };
+		17FDD5461F3A58EA00CF6577 /* Grapefruit Sunset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Grapefruit Sunset.png"; sourceTree = "<group>"; };
+		17FDD5471F3A58EA00CF6577 /* Frost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Frost.png; sourceTree = "<group>"; };
+		17FDD5481F3A58EA00CF6577 /* Ed's Sunset Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ed's Sunset Gradient.png"; sourceTree = "<group>"; };
+		17FDD5491F3A58EA00CF6577 /* Dusk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dusk.png; sourceTree = "<group>"; };
+		17FDD54A1F3A58EA00CF6577 /* Disco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Disco.png; sourceTree = "<group>"; };
+		17FDD54B1F3A58EA00CF6577 /* Deep Space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Deep Space.png"; sourceTree = "<group>"; };
+		17FDD54C1F3A58EA00CF6577 /* Decent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Decent.png; sourceTree = "<group>"; };
+		17FDD54D1F3A58EA00CF6577 /* Brady Brady Fun Fun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Brady Brady Fun Fun.png"; sourceTree = "<group>"; };
+		17FDD54E1F3A58EA00CF6577 /* 50 Shades of Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "50 Shades of Grey.png"; sourceTree = "<group>"; };
+		17FDD5611F3A60C400CF6577 /* ThemePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePreviewViewController.swift; sourceTree = "<group>"; };
+		17FDD5631F3A6C3700CF6577 /* BuildHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildHomeViewController.swift; sourceTree = "<group>"; };
+		17FDD5651F3A6F0500CF6577 /* BrowseExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseExerciseViewController.swift; sourceTree = "<group>"; };
+		17FDD5671F3A78F700CF6577 /* YNActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNActionSheet.swift; sourceTree = "<group>"; };
+		17FDD56B1F3AA85600CF6577 /* YNActionSheetNoTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNActionSheetNoTitle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +326,8 @@
 		1757200A1F298A20003DBA42 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				17FDD53C1F3A58B700CF6577 /* Backgrounds */,
+				17FDD5381F3A3EE900CF6577 /* settings_3_filled-50.png */,
 				175AD67C1F32E74400473CE2 /* notee.png */,
 				17375A151F323A9A00C41F7C /* photo.png */,
 				17E2C9AB1F3127FD002217DA /* cardio.png */,
@@ -332,8 +384,10 @@
 		17775B631E2E7A73000C055B = {
 			isa = PBXGroup;
 			children = (
-				17DF99AE1F2F84D900F0182D /* OnBoard */,
+				17FDD5611F3A60C400CF6577 /* ThemePreviewViewController.swift */,
+				17FDD53A1F3A568E00CF6577 /* ThemePickerTableViewController.swift */,
 				17DE1EF31F230386006C3DD6 /* fitspire.entitlements */,
+				17DF99AE1F2F84D900F0182D /* OnBoard */,
 				17DE1EC61F21DAC9006C3DD6 /* BUILD */,
 				17DE1EC81F21DB11006C3DD6 /* Go */,
 				17DE1EC71F21DAEF006C3DD6 /* Plan */,
@@ -357,8 +411,12 @@
 		17775B6E1E2E7A73000C055B /* Currently Editing */ = {
 			isa = PBXGroup;
 			children = (
+				17FDD5671F3A78F700CF6577 /* YNActionSheet.swift */,
 				17775B6F1E2E7A74000C055B /* AppDelegate.swift */,
 				17775B731E2E7A74000C055B /* Main.storyboard */,
+				17FDD56B1F3AA85600CF6577 /* YNActionSheetNoTitle.swift */,
+				17FDD5651F3A6F0500CF6577 /* BrowseExerciseViewController.swift */,
+				17FDD5631F3A6C3700CF6577 /* BuildHomeViewController.swift */,
 				176F42531F318F0600014A9D /* StatDetailTableViewCell.swift */,
 				17A1A0E11F31358D00BBB7CE /* StatViewController.swift */,
 				176F424D1F3165F900014A9D /* StatDetailViewController.swift */,
@@ -459,9 +517,9 @@
 			children = (
 				175AD6781F32E0AD00473CE2 /* NoteView.xib */,
 				175AD6741F32DF6E00473CE2 /* NoteView.swift */,
+				17DF99A81F2D829E00F0182D /* SaveWorkoutViewController.swift */,
 				179CC3BE1F272679001DCD27 /* GoInitialViewController.swift */,
 				174B5B571F2068F6001755DD /* CircleSliderViewController.swift */,
-				17DF99A81F2D829E00F0182D /* SaveWorkoutViewController.swift */,
 				1784309D1F28EF1A0066A744 /* YLProgressBar.m */,
 				1784309E1F28EF1A0066A744 /* YLProgressBar.h */,
 				1784309C1F28EF000066A744 /* fitspire-Bridging-Header.h */,
@@ -485,6 +543,31 @@
 				175720191F2BBEDF003DBA42 /* OnboardViewController.swift */,
 			);
 			name = OnBoard;
+			sourceTree = "<group>";
+		};
+		17FDD53C1F3A58B700CF6577 /* Backgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				17FDD53D1F3A58EA00CF6577 /* Vine.png */,
+				17FDD53E1F3A58EA00CF6577 /* Tranquil.png */,
+				17FDD53F1F3A58EA00CF6577 /* Sweet Morning.png */,
+				17FDD5401F3A58EA00CF6577 /* Red Ocean.png */,
+				17FDD5411F3A58EA00CF6577 /* Radar.png */,
+				17FDD5421F3A58EA00CF6577 /* Purple White.png */,
+				17FDD5431F3A58EA00CF6577 /* Poncho.png */,
+				17FDD5441F3A58EA00CF6577 /* Netflix.png */,
+				17FDD5451F3A58EA00CF6577 /* Lizard.png */,
+				17FDD5461F3A58EA00CF6577 /* Grapefruit Sunset.png */,
+				17FDD5471F3A58EA00CF6577 /* Frost.png */,
+				17FDD5481F3A58EA00CF6577 /* Ed's Sunset Gradient.png */,
+				17FDD5491F3A58EA00CF6577 /* Dusk.png */,
+				17FDD54A1F3A58EA00CF6577 /* Disco.png */,
+				17FDD54B1F3A58EA00CF6577 /* Deep Space.png */,
+				17FDD54C1F3A58EA00CF6577 /* Decent.png */,
+				17FDD54D1F3A58EA00CF6577 /* Brady Brady Fun Fun.png */,
+				17FDD54E1F3A58EA00CF6577 /* 50 Shades of Grey.png */,
+			);
+			name = Backgrounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -563,6 +646,7 @@
 				1789E4251F31204100AF2533 /* GOBUTTON.png in Resources */,
 				17FDD5341F39543400CF6577 /* greenup.png in Resources */,
 				17E2C9AF1F3127FD002217DA /* cardio.png in Resources */,
+				17FDD55C1F3A58EA00CF6577 /* Disco.png in Resources */,
 				17FDD5371F3A10E700CF6577 /* dotcircle.png in Resources */,
 				17E2C9921F312682002217DA /* abs.png in Resources */,
 				17DF99BA1F2FBB1E00F0182D /* graveyard.rtf in Resources */,
@@ -574,41 +658,56 @@
 				1789E41B1F31204000AF2533 /* triceps.png in Resources */,
 				1789E42B1F31204100AF2533 /* newgreen.jpg in Resources */,
 				17E2C9A21F3127D9002217DA /* beginner.png in Resources */,
+				17FDD55B1F3A58EA00CF6577 /* Dusk.png in Resources */,
 				17775B7A1E2E7A74000C055B /* LaunchScreen.storyboard in Resources */,
 				1789E4321F31204100AF2533 /* print.png in Resources */,
 				17375A161F323A9A00C41F7C /* photo.png in Resources */,
+				17FDD54F1F3A58EA00CF6577 /* Vine.png in Resources */,
 				1789E4071F31204000AF2533 /* blur.jpg in Resources */,
 				174B5B5B1F2068F6001755DD /* whiteflame1.png in Resources */,
 				17FDD5321F39543400CF6577 /* whiteup.png in Resources */,
 				1789E4101F31204000AF2533 /* flex_biceps-50.png in Resources */,
 				17E2C9A31F3127D9002217DA /* cableee.png in Resources */,
 				1789E4151F31204000AF2533 /* plan.png in Resources */,
+				17FDD5561F3A58EA00CF6577 /* Netflix.png in Resources */,
 				1789E40C1F31204000AF2533 /* chest.png in Resources */,
+				17FDD55F1F3A58EA00CF6577 /* Brady Brady Fun Fun.png in Resources */,
 				1789E4091F31204000AF2533 /* calendar_30-50.png in Resources */,
 				1789E4211F31204100AF2533 /* asback.jpg in Resources */,
 				1789E40B1F31204000AF2533 /* change.png in Resources */,
 				1789E4121F31204000AF2533 /* glutes.png in Resources */,
+				17FDD5391F3A3EE900CF6577 /* settings_3_filled-50.png in Resources */,
+				17FDD5571F3A58EA00CF6577 /* Lizard.png in Resources */,
 				17E2C9A51F3127D9002217DA /* expert.png in Resources */,
+				17FDD55A1F3A58EA00CF6577 /* Ed's Sunset Gradient.png in Resources */,
 				1789E4341F31204100AF2533 /* rest1.jpg in Resources */,
 				1789E4181F31204000AF2533 /* search.png in Resources */,
 				1789E4291F31204100AF2533 /* linked.jpg in Resources */,
+				17FDD5501F3A58EA00CF6577 /* Tranquil.png in Resources */,
 				1789E41F1F31204100AF2533 /* tricepdips.png in Resources */,
 				17E2C9941F3126A8002217DA /* biceps.png in Resources */,
 				1789E4241F31204100AF2533 /* chestflies.png in Resources */,
 				1789E4061F31204000AF2533 /* blackflm.png in Resources */,
 				1789E4271F31204100AF2533 /* icon iphone 2x.png in Resources */,
+				17FDD5541F3A58EA00CF6577 /* Purple White.png in Resources */,
 				1789E4041F31204000AF2533 /* blackflame.png in Resources */,
 				17E2C9AA1F3127D9002217DA /* otherrr.png in Resources */,
+				17FDD5531F3A58EA00CF6577 /* Radar.png in Resources */,
 				1789E4161F31204000AF2533 /* public.png in Resources */,
 				1789E4261F31204100AF2533 /* hulk mania.jpg in Resources */,
+				17FDD5591F3A58EA00CF6577 /* Frost.png in Resources */,
 				1789E4281F31204100AF2533 /* liftDay.png in Resources */,
 				17E2C9961F3126F5002217DA /* custom.png in Resources */,
 				1789E42A1F31204100AF2533 /* newback.jpg in Resources */,
 				17E2C9A91F3127D9002217DA /* noneee.png in Resources */,
+				17FDD5551F3A58EA00CF6577 /* Poncho.png in Resources */,
+				17FDD5601F3A58EA00CF6577 /* 50 Shades of Grey.png in Resources */,
+				17FDD55D1F3A58EA00CF6577 /* Deep Space.png in Resources */,
 				1789E4201F31204100AF2533 /* whiteline.png in Resources */,
 				1789E41A1F31204000AF2533 /* traps.png in Resources */,
 				17E2C9A81F3127D9002217DA /* machineee.png in Resources */,
 				17E2C9B21F3127FD002217DA /* yoga.png in Resources */,
+				17FDD5521F3A58EA00CF6577 /* Red Ocean.png in Resources */,
 				1789E4361F31204100AF2533 /* training.jpg in Resources */,
 				1789E42E1F31204100AF2533 /* onboard3.jpg in Resources */,
 				17E2C9A11F3127D9002217DA /* barbelll.png in Resources */,
@@ -621,6 +720,7 @@
 				1789E4081F31204000AF2533 /* browse.png in Resources */,
 				1789E40D1F31204000AF2533 /* deltoid.png in Resources */,
 				1789E40E1F31204000AF2533 /* dumbbell-50.png in Resources */,
+				17FDD5581F3A58EA00CF6577 /* Grapefruit Sunset.png in Resources */,
 				17775B771E2E7A74000C055B /* Assets.xcassets in Resources */,
 				1789E4051F31204000AF2533 /* blackflamereal.png in Resources */,
 				1789E4221F31204100AF2533 /* back.jpeg in Resources */,
@@ -629,6 +729,7 @@
 				1789E4141F31204000AF2533 /* lowerback.png in Resources */,
 				175AD67D1F32E74400473CE2 /* notee.png in Resources */,
 				17E2C9901F31264C002217DA /* back.png in Resources */,
+				17FDD5511F3A58EA00CF6577 /* Sweet Morning.png in Resources */,
 				1789E42F1F31204100AF2533 /* onboard4.jpg in Resources */,
 				1789E4351F31204100AF2533 /* tonyHorton.jpg in Resources */,
 				17E2C9B11F3127FD002217DA /* stretch.png in Resources */,
@@ -637,6 +738,7 @@
 				17E2C9A41F3127D9002217DA /* dumbellll.png in Resources */,
 				1789E42D1F31204100AF2533 /* onboard2.jpg in Resources */,
 				17FDD5331F39543400CF6577 /* whitedown.png in Resources */,
+				17FDD55E1F3A58EA00CF6577 /* Decent.png in Resources */,
 				1789E4171F31204000AF2533 /* quads.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,6 +750,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17FDD5681F3A78F700CF6577 /* YNActionSheet.swift in Sources */,
 				17BAC1B61E39AD46000EE7FF /* SplitItem.swift in Sources */,
 				176F424E1F3165F900014A9D /* StatDetailViewController.swift in Sources */,
 				17DE1ECC1F22637E006C3DD6 /* BuildViewController.swift in Sources */,
@@ -655,14 +758,17 @@
 				17877B4E1F2193510064F243 /* SearchExerciseViewController.swift in Sources */,
 				17375A141F31C6C500C41F7C /* NewWorkoutViewController.swift in Sources */,
 				17877B461F218ECD0064F243 /* ExerciseCollectionViewCell.swift in Sources */,
+				17FDD5621F3A60C400CF6577 /* ThemePreviewViewController.swift in Sources */,
 				174B5B601F2068F6001755DD /* GradientCircularSlider.swift in Sources */,
 				174B5B5F1F2068F6001755DD /* CircularTrig.swift in Sources */,
 				17DE1ECE1F226399006C3DD6 /* FeaturedCollectionViewCell.swift in Sources */,
 				17775B721E2E7A74000C055B /* ViewController.swift in Sources */,
 				175B9BB71F258A0D0018A64B /* DisplayWorkoutViewController.swift in Sources */,
 				178430A01F28EF1A0066A744 /* YLProgressBar.m in Sources */,
+				17FDD56C1F3AA85600CF6577 /* YNActionSheetNoTitle.swift in Sources */,
 				17BAC1B41E39353A000EE7FF /* customSegment.swift in Sources */,
 				174B5B611F2068F6001755DD /* CircleSliderViewController.swift in Sources */,
+				17FDD53B1F3A568E00CF6577 /* ThemePickerTableViewController.swift in Sources */,
 				176F42541F318F0600014A9D /* StatDetailTableViewCell.swift in Sources */,
 				17B330461E3858B4009F5154 /* ScheduleItemCell.swift in Sources */,
 				17A1A0E21F31358D00BBB7CE /* StatViewController.swift in Sources */,
@@ -672,6 +778,7 @@
 				17DF99AC1F2D9D8200F0182D /* HeaderCell.swift in Sources */,
 				17877B3A1F21638C0064F243 /* WorkoutViewController.swift in Sources */,
 				175AD6751F32DF6E00473CE2 /* NoteView.swift in Sources */,
+				17FDD5661F3A6F0500CF6577 /* BrowseExerciseViewController.swift in Sources */,
 				176F42501F3179C700014A9D /* StatTableViewCell.swift in Sources */,
 				17775B701E2E7A74000C055B /* AppDelegate.swift in Sources */,
 				17DE1ED61F22BD2E006C3DD6 /* ExercisesViewController.swift in Sources */,
@@ -680,6 +787,7 @@
 				1757201A1F2BBEDF003DBA42 /* OnboardViewController.swift in Sources */,
 				174B5B5C1F2068F6001755DD /* AKPickerView.swift in Sources */,
 				17375A101F31AEAD00C41F7C /* WorkoutCollectionViewCell.swift in Sources */,
+				17FDD5641F3A6C3700CF6577 /* BuildHomeViewController.swift in Sources */,
 				17375A121F31B29B00C41F7C /* WorkoutTableViewCell.swift in Sources */,
 				17DF99A91F2D829E00F0182D /* SaveWorkoutViewController.swift in Sources */,
 				174B5B781F213C2C001755DD /* Model.xcdatamodeld in Sources */,

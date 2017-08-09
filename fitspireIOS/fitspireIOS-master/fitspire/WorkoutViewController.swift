@@ -9,22 +9,23 @@
 import UIKit
 import CoreData
 import Foundation
-class WorkoutViewController: UIViewController {
-
+class WorkoutViewController: UIViewController, YNActionSheetDelegate {
+    @IBOutlet var background : UIImageView!
     @IBOutlet weak var workoutCollectionView: UICollectionView!
     var workouts: [NSManagedObject] = []
     var addingIndex = 0
     var dates : [NSManagedObject] = []
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-     
-           }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if let savedValue = UserDefaults.standard.string(forKey: "backgroundName") {
+            var image = UIImage(named: savedValue)
+            background.image = image
+        }
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -46,10 +47,10 @@ class WorkoutViewController: UIViewController {
 
         
     }
-
- 
+    
     @IBAction func show(sender: UIButton) {
-        if let cell = sender.superview?.superview as? WorkoutCollectionViewCell {
+       
+        if let cell = sender.superview?.superview?.superview as? WorkoutCollectionViewCell {
             let indexPath = workoutCollectionView.indexPath(for: cell)
             
             self.addingIndex = (indexPath?.row)!
@@ -58,20 +59,21 @@ class WorkoutViewController: UIViewController {
         let addWorkout = workouts[self.addingIndex]
         let workoutName = addWorkout.value(forKey: "workoutName") as! String
         
-        
-        let actionSheet = UIAlertController(title: workoutName , message: nil, preferredStyle: .actionSheet)
-        actionSheet.view.tintColor = UIColor.green
-        
-        
-        actionSheet.addAction(UIAlertAction(title: "Add to Schedule", style: .default, handler: {action in self.chooseDay()} ))
-        actionSheet.addAction(UIAlertAction(title: "Delete Workout", style: .default, handler: nil))
-        
-        
-        
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(actionSheet, animated: true, completion: nil)
+        displayAction(detail: workoutName)
     }
-    
+    func displayAction(detail: String){
+        var action = YNActionSheet()
+        action.delegate = self as! YNActionSheetDelegate
+        action.addCancelButtonWithTitle("Cancel")
+        action.addButtonWithTitle(detail)
+        action.addButtonWithTitle("Add Workout to Split")
+        action.addButtonWithTitle("Add Workout to Day")
+        action.addButtonWithTitle("Share Workout")
+        self.present(action, animated: true) { () -> Void in
+            
+        }
+    }
+
     func chooseDay(){
         let actionSheet = UIAlertController(title: "Add Workout To: ", message: nil, preferredStyle: .actionSheet)
         for i in 0...dates.count - 1{
@@ -101,6 +103,24 @@ class WorkoutViewController: UIViewController {
         workoutCollectionView.reloadData()
     }
 
+    func buttonClick(_ index: Int) {
+       
+        if( index == 1){
+            let when = DispatchTime.now() + 0.3
+            DispatchQueue.main.asyncAfter(deadline: when){
+                // your code with delay
+                self.chooseDay()
+            }
+            
+           
+        }
+        if(index == 2){
+            
+        }
+        if(index == 3){
+            
+        }
+    }
 
     func addToDay(workoutDate: Date){
         var addDate : [NSManagedObject] = []
